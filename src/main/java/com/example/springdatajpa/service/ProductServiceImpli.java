@@ -5,8 +5,8 @@ import com.example.springdatajpa.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 @Service
 public class ProductServiceImpli implements ProductService {
@@ -17,6 +17,11 @@ public class ProductServiceImpli implements ProductService {
     @Override
     public Iterable<Product> getProducts() {
         return productRepository.findAll();
+    }
+
+    @Override
+    public Optional<Product> getProductById(Long id) {
+        return productRepository.findById(id);
     }
 
     @Override
@@ -49,5 +54,9 @@ public class ProductServiceImpli implements ProductService {
                     product.getPrice());
         }
         return productRepository.save(productData);
+    }
+
+    public void deleteProductById(Long id) {
+        productRepository.deleteById(id);
     }
 }

@@ -9,6 +9,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/products")
+@CrossOrigin(origins = "http://localhost:3000")
 public class ProductController {
 
     @Autowired
@@ -22,10 +23,10 @@ public class ProductController {
 //        return result;
     }
 
-//    @GetMapping("/{id}")
-//    public Optional<Product> getProductById(@PathVariable("id") Long id){
-//        return productRepository.findById(id);
-//    }
+    @GetMapping("/{id}")
+    public Optional<Product> getProductById(@PathVariable("id") Long id){
+        return productService.getProductById(id);
+    }
 
     @PostMapping
     public Product addProduct(@RequestBody Product product) {
@@ -38,8 +39,9 @@ public class ProductController {
     }
 
 
-//    @DeleteMapping("/{id}")
-//    public Product deleteProductById(@PathVariable("id") Long id){
-//        return productRepository.deleteById(id);
-//    }
+    @DeleteMapping("/{id}")
+    public String deleteProductById(@PathVariable("id") Long id){
+        productService.deleteProductById(id);
+        return "Successfully Deleted";
+    }
 }
