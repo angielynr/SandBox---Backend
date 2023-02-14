@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface ProductRepository extends CrudRepository<Product, Long> {
 
-   List<Product> findByName(String name);
+   List<Product> findByName(String name); //for testClass
 }

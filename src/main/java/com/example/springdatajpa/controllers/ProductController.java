@@ -1,7 +1,7 @@
 package com.example.springdatajpa.controllers;
 
 import com.example.springdatajpa.entities.Product;
-import com.example.springdatajpa.repository.ProductRepository;
+import com.example.springdatajpa.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,29 +12,29 @@ import java.util.Optional;
 public class ProductController {
 
     @Autowired
-    ProductRepository productRepository;
+    ProductService productService;
 
-    @GetMapping("/get")
-    public Iterable<Product> getProducts(){
-        return productRepository.findAll();
+    @GetMapping
+    public Iterable<Product> getProducts() {
+        return productService.getProducts();
 //        List<Product> result = new ArrayList<Product>();
 //        productRepository.findAll().forEach(product -> result.add(product));
 //        return result;
     }
 
-    @GetMapping("/{id}")
-    public Optional<Product> getProductById(@PathVariable("id") Long id){
-        return productRepository.findById(id);
-    }
+//    @GetMapping("/{id}")
+//    public Optional<Product> getProductById(@PathVariable("id") Long id){
+//        return productRepository.findById(id);
+//    }
 
     @PostMapping
-    public Product addProduct(@RequestBody Product product){
-        return  productRepository.save(product);
+    public Product addProduct(@RequestBody Product product) {
+        return productService.addProduct(product);
     }
 
-    @PutMapping
-    public Product updateProduct(@RequestBody Product product){
-        return  productRepository.save(product);
+    @PutMapping("/{id}")
+    public Product updateProduct(@RequestBody Product product, @PathVariable("id") Long id) {
+        return productService.updateProduct(product, id);
     }
 
 
