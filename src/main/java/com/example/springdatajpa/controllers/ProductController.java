@@ -18,9 +18,6 @@ public class ProductController {
     @GetMapping
     public Iterable<Product> getProducts() {
         return productService.getProducts();
-//        List<Product> result = new ArrayList<Product>();
-//        productRepository.findAll().forEach(product -> result.add(product));
-//        return result;
     }
 
     @GetMapping("/{id}")
