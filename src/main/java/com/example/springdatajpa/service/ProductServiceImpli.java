@@ -30,7 +30,7 @@ public class ProductServiceImpli implements ProductService {
     }
 
     @Override
-    public Product updateProduct(Product product, Long id) {
+    public Product updateProduct(Long id ,Product product) {
 
         Product productData = productRepository.findById(id).get();
 
