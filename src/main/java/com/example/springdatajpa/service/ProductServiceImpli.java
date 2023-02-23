@@ -1,6 +1,6 @@
 package com.example.springdatajpa.service;
 
-import com.example.springdatajpa.entities.Product;
+import com.example.springdatajpa.model.Product;
 import com.example.springdatajpa.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

@@ -1,6 +1,6 @@
 package com.example.springdatajpa.repository;
 
-import com.example.springdatajpa.entities.Product;
+import com.example.springdatajpa.model.Product;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;

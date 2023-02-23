@@ -1,12 +1,11 @@
 package com.example.springdatajpa;
 
-import com.example.springdatajpa.entities.Product;
+import com.example.springdatajpa.model.Product;
 import com.example.springdatajpa.repository.ProductRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.ApplicationContext;
-import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.List;
 import java.util.Optional;

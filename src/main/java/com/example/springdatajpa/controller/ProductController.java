@@ -1,6 +1,6 @@
-package com.example.springdatajpa.controllers;
+package com.example.springdatajpa.controller;
 
-import com.example.springdatajpa.entities.Product;
+import com.example.springdatajpa.model.Product;
 import com.example.springdatajpa.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
