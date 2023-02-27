@@ -1,18 +1,20 @@
 package com.example.springdatajpa.service;
 
-import com.example.springdatajpa.model.Product;
+import com.example.springdatajpa.dto.ProductDTO;
+import org.springframework.stereotype.Service;
 
-import java.util.Optional;
+import java.util.List;
 
+@Service
 public interface ProductService {
 
-    Iterable<Product> getProducts();
+    List<ProductDTO> getProducts();
 
-    Optional<Product> getProductById(Long id);
+    ProductDTO getProductById(Long id);
 
-    Product addProduct(Product product);
+    ProductDTO addProduct(ProductDTO product);
 
-    Product updateProduct(Long id, Product product);
+    ProductDTO updateProduct(Long id, ProductDTO product);
 
      void deleteProductById(Long id);
 }

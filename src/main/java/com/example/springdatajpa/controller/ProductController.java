@@ -1,11 +1,11 @@
 package com.example.springdatajpa.controller;
 
-import com.example.springdatajpa.model.Product;
+import com.example.springdatajpa.dto.ProductDTO;
 import com.example.springdatajpa.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Optional;
+import java.util.List;
 
 @RestController
 @RequestMapping("/products")
@@ -16,22 +16,22 @@ public class ProductController {
     ProductService productService;
 
     @GetMapping
-    public Iterable<Product> getProducts() {
+    public List<ProductDTO> getProducts() {
         return productService.getProducts();
     }
 
     @GetMapping("/{id}")
-    public Optional<Product> getProductById(@PathVariable("id") Long id){
+    public ProductDTO getProductById(@PathVariable("id") Long id){
         return productService.getProductById(id);
     }
 
     @PostMapping
-    public Product addProduct(@RequestBody Product product) {
+    public ProductDTO addProduct(@RequestBody ProductDTO product) {
         return productService.addProduct(product);
     }
 
     @PutMapping("/{id}")
-    public Product updateProduct(@PathVariable("id") Long id, @RequestBody Product product) {
+    public ProductDTO updateProduct(@PathVariable("id") Long id, @RequestBody ProductDTO product) {
         return productService.updateProduct(id, product);
     }
 

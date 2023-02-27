@@ -1,12 +1,14 @@
 package com.example.springdatajpa.service;
 
+import com.example.springdatajpa.dto.ProductDTO;
 import com.example.springdatajpa.model.Product;
 import com.example.springdatajpa.repository.ProductRepository;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Objects;
-import java.util.Optional;
 
 @Service
 public class ProductServiceImpli implements ProductService {
@@ -14,46 +16,61 @@ public class ProductServiceImpli implements ProductService {
     @Autowired
     ProductRepository productRepository;
 
+    @Autowired
+    ModelMapper modelMapper;
+
     @Override
-    public Iterable<Product> getProducts() {
-        return productRepository.findAll();
+    public List<ProductDTO> getProducts() {
+        List<Product> products = productRepository.findAll();
+        List<ProductDTO> productDTOs = products.stream().map(product -> modelMapper.map(product, ProductDTO.class)).toList();
+    return productDTOs;
+//        return productRepository.findAll().stream().map(product -> modelMapper.map(product, ProductDTO.class)).toList();
     }
 
     @Override
-    public Optional<Product> getProductById(Long id) {
-        return productRepository.findById(id);
+    public ProductDTO getProductById(Long id) {
+        Product product = productRepository.findById(id).get();
+        ProductDTO productDTO = modelMapper.map(product, ProductDTO.class);
+        return productDTO;
     }
 
     @Override
-    public Product addProduct(Product product) {
-        return productRepository.save(product);
+    public ProductDTO addProduct(ProductDTO productDto) {
+        Product product = modelMapper.map(productDto, Product.class);
+        Product savedProduct = productRepository.save(product);
+        ProductDTO savedProductDto = modelMapper.map(savedProduct, ProductDTO.class);
+        return savedProductDto;
     }
 
     @Override
-    public Product updateProduct(Long id ,Product product) {
+    public ProductDTO updateProduct(Long id ,ProductDTO product) {
 
         Product productData = productRepository.findById(id).get();
 
-        if (Objects.nonNull(product.getName())
+        if (Objects.nonNull(productData.getName())
                 && !"".equalsIgnoreCase(
-                product.getName())) {
+                productData.getName())) {
             productData.setName(
                     product.getName());
         }
 
         if (Objects.nonNull(
-                product.getDescription())
+                productData.getDescription())
                 && !"".equalsIgnoreCase(
-                product.getDescription())) {
+                productData.getDescription())) {
             productData.setDescription(
                     product.getDescription());
         }
 
-        if (Objects.nonNull(product.getPrice())) {
+        if (Objects.nonNull(productData.getPrice())) {
             productData.setPrice(
                     product.getPrice());
         }
-        return productRepository.save(productData);
+
+        Product savedProduct = productRepository.save(productData);
+        ProductDTO productDTO = modelMapper.map(savedProduct, ProductDTO.class);
+
+        return productDTO;
     }
 
     public void deleteProductById(Long id) {
