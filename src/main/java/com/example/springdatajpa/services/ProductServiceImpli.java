@@ -1,6 +1,7 @@
 package com.example.springdatajpa.services;
 
 import com.example.springdatajpa.dto.ProductDTO;
+import com.example.springdatajpa.exceptions.RecordNotFoundException;
 import com.example.springdatajpa.mapper.ProductMapper;
 import com.example.springdatajpa.models.Product;
 import com.example.springdatajpa.repositories.ProductRepository;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 @Service
 public class ProductServiceImpli implements ProductService {
@@ -46,10 +48,14 @@ public class ProductServiceImpli implements ProductService {
     }
 
     @Override
-    public ProductDTO updateProduct(Long id ,ProductDTO productDto) {
+    public ProductDTO updateProduct(Long id ,ProductDTO productDto) throws RecordNotFoundException {
+
+        Optional<Product> productId= productRepository.findById(id);
+        if(productId.isEmpty()){
+            throw new RecordNotFoundException("Product not found with id " + id);
+        }
 
         Product productData = productRepository.findById(id).get();
-
         if (Objects.nonNull(productData.getName())
                 && !"".equalsIgnoreCase(
                 productData.getName())) {
@@ -76,7 +82,11 @@ public class ProductServiceImpli implements ProductService {
         return productMapper.modelToDto(savedProduct);
     }
 
-    public void deleteProductById(Long id) {
+    public void deleteProductById(Long id)  throws RecordNotFoundException {
+        Optional<Product> productId= productRepository.findById(id);
+        if(productId.isEmpty()){
+            throw new RecordNotFoundException("Product not found with id " + id);
+        }
         productRepository.deleteById(id);
     }
 }

@@ -1,6 +1,7 @@
 package com.example.springdatajpa.services;
 
 import com.example.springdatajpa.dto.ProductDTO;
+import com.example.springdatajpa.exceptions.RecordNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,7 +15,7 @@ public interface ProductService {
 
     ProductDTO addProduct(ProductDTO product);
 
-    ProductDTO updateProduct(Long id, ProductDTO product);
+    ProductDTO updateProduct(Long id, ProductDTO product)  throws RecordNotFoundException;
 
-     void deleteProductById(Long id);
+     void deleteProductById(Long id)  throws RecordNotFoundException ;
 }

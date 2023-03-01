@@ -1,6 +1,8 @@
 package com.example.springdatajpa.controllers;
 
 import com.example.springdatajpa.dto.ProductDTO;
+import com.example.springdatajpa.exceptions.RecordNotFoundException;
+import com.example.springdatajpa.models.Product;
 import com.example.springdatajpa.services.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -31,18 +33,18 @@ public class ProductController {
 
     @PostMapping
     public ResponseEntity<ProductDTO> addProduct(@RequestBody ProductDTO product) {
-        return new ResponseEntity<>(productService.addProduct(product), HttpStatus.OK);
+        return new ResponseEntity<>(productService.addProduct(product), HttpStatus.CREATED);
 //        return productService.addProduct(product);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<ProductDTO> updateProduct(@PathVariable("id") Long id, @RequestBody ProductDTO product) {
+    public ResponseEntity<ProductDTO> updateProduct(@PathVariable("id") Long id, @RequestBody ProductDTO product) throws RecordNotFoundException {
         return new ResponseEntity<>(productService.updateProduct(id, product), HttpStatus.OK);
 //        return productService.updateProduct(id, product);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> deleteProductById(@PathVariable("id") Long id) {
+    public ResponseEntity<String> deleteProductById(@PathVariable("id") Long id) throws RecordNotFoundException{
         productService.deleteProductById(id);
         return new ResponseEntity<>("Product Successfully Deleted", HttpStatus.OK);
 //        return "Successfully Deleted";
