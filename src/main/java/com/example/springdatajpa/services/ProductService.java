@@ -1,4 +1,4 @@
-package com.example.springdatajpa.service;
+package com.example.springdatajpa.services;
 
 import com.example.springdatajpa.dto.ProductDTO;
 import org.springframework.stereotype.Service;

@@ -1,7 +1,7 @@
 package com.example.springdatajpa;
 
-import com.example.springdatajpa.model.Product;
-import com.example.springdatajpa.repository.ProductRepository;
+import com.example.springdatajpa.models.Product;
+import com.example.springdatajpa.repositories.ProductRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;

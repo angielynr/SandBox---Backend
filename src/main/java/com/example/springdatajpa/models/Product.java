@@ -1,4 +1,4 @@
-package com.example.springdatajpa.model;
+package com.example.springdatajpa.models;
 
 import jakarta.persistence.*;
 import lombok.Data;
