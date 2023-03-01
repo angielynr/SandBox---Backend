@@ -1,10 +1,10 @@
 package com.example.springdatajpa.mapper;
 
 import com.example.springdatajpa.dto.ProductDTO;
-import com.example.springdatajpa.model.Product;
-//import org.mapstruct.Mapper;
+import com.example.springdatajpa.models.Product;
+import org.mapstruct.Mapper;
 
-//@Mapper(componentModel = "spring")
+@Mapper(componentModel = "spring")
 public interface ProductMapper {
 
     ProductDTO modelToDto(Product product);
