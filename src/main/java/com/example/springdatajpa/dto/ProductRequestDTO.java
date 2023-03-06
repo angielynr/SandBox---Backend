@@ -7,13 +7,13 @@ import lombok.Data;
 @Data
 public class ProductRequestDTO {
 
-    @NotNull(message = "Product name shoudn't be null")
+    @NotNull(message = "Product name shouldn't be null")
     private String name;
 
-    @NotBlank(message = "Product description shoudn't be blank")
+    @NotBlank(message = "Product description shouldn't be blank")
     private String description;
 
-    @NotNull(message = "Product price shoudn't be null")
+    @NotNull(message = "Product price shouldn't be null")
     private Double price;
 
 }
