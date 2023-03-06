@@ -1,9 +1,10 @@
 package com.example.springdatajpa.controllers;
 
-import com.example.springdatajpa.dto.ProductDTO;
+import com.example.springdatajpa.dto.ProductRequestDTO;
+import com.example.springdatajpa.dto.ProductResponseDTO;
 import com.example.springdatajpa.exceptions.RecordNotFoundException;
-import com.example.springdatajpa.models.Product;
 import com.example.springdatajpa.services.ProductService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,33 +21,28 @@ public class ProductController {
     ProductService productService;
 
     @GetMapping
-    public ResponseEntity<List<ProductDTO>> getProducts() {
+    public ResponseEntity<List<ProductResponseDTO>> getProducts() {
         return new ResponseEntity<>(productService.getProducts(), HttpStatus.OK);
-//        return productService.getProducts();
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<ProductDTO> getProductById(@PathVariable("id") Long id){
+    public ResponseEntity<ProductResponseDTO> getProductById(@PathVariable("id") Long id){
         return new ResponseEntity<>(productService.getProductById(id), HttpStatus.OK);
-//        return productService.getProductById(id);
     }
 
     @PostMapping
-    public ResponseEntity<ProductDTO> addProduct(@RequestBody ProductDTO product) {
-        return new ResponseEntity<>(productService.addProduct(product), HttpStatus.CREATED);
-//        return productService.addProduct(product);
+    public ResponseEntity<ProductResponseDTO> addProduct(@RequestBody @Valid ProductRequestDTO productRequestDTO) {
+        return new ResponseEntity<>(productService.addProduct(productRequestDTO), HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<ProductDTO> updateProduct(@PathVariable("id") Long id, @RequestBody ProductDTO product) throws RecordNotFoundException {
-        return new ResponseEntity<>(productService.updateProduct(id, product), HttpStatus.OK);
-//        return productService.updateProduct(id, product);
+    public ResponseEntity<ProductResponseDTO> updateProduct(@PathVariable("id") Long id, @RequestBody ProductRequestDTO productRequestDTO) throws RecordNotFoundException {
+        return new ResponseEntity<>(productService.updateProduct(id, productRequestDTO), HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteProductById(@PathVariable("id") Long id) throws RecordNotFoundException{
         productService.deleteProductById(id);
         return new ResponseEntity<>("Product Successfully Deleted", HttpStatus.OK);
-//        return "Successfully Deleted";
     }
 }

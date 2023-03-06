@@ -1,6 +1,7 @@
 package com.example.springdatajpa.services;
 
-import com.example.springdatajpa.dto.ProductDTO;
+import com.example.springdatajpa.dto.ProductRequestDTO;
+import com.example.springdatajpa.dto.ProductResponseDTO;
 import com.example.springdatajpa.exceptions.RecordNotFoundException;
 import com.example.springdatajpa.mapper.ProductMapper;
 import com.example.springdatajpa.models.Product;
@@ -26,29 +27,26 @@ public class ProductServiceImpli implements ProductService {
     ModelMapper modelMapper;
 
     @Override
-    public List<ProductDTO> getProducts() {
+    public List<ProductResponseDTO> getProducts() {
         List<Product> products = productRepository.findAll();
-//        List<ProductDTO> productDTOs = products.stream().map(product -> modelMapper.map(product, ProductDTO.class)).toList();
     return products.stream().map(product -> productMapper.modelToDto(product)).toList();
     }
 
     @Override
-    public ProductDTO getProductById(Long id) {
+    public ProductResponseDTO getProductById(Long id) {
         Product product = productRepository.findById(id).get();
-//        ProductDTO productDTO = modelMapper.map(product, ProductDTO.class);
         return productMapper.modelToDto(product);
     }
 
     @Override
-    public ProductDTO addProduct(ProductDTO productDto) {
-        Product product = modelMapper.map(productDto, Product.class);
+    public ProductResponseDTO addProduct(ProductRequestDTO productRequestDto) {
+        Product product = modelMapper.map(productRequestDto, Product.class);
         Product savedProduct = productRepository.save(product);
-//        ProductDTO savedProductDto = modelMapper.map(savedProduct, ProductDTO.class);
         return productMapper.modelToDto(savedProduct);
     }
 
     @Override
-    public ProductDTO updateProduct(Long id ,ProductDTO productDto) throws RecordNotFoundException {
+    public ProductResponseDTO updateProduct(Long id , ProductRequestDTO productRequestDto) throws RecordNotFoundException {
 
         Optional<Product> productId= productRepository.findById(id);
         if(productId.isEmpty()){
@@ -60,7 +58,7 @@ public class ProductServiceImpli implements ProductService {
                 && !"".equalsIgnoreCase(
                 productData.getName())) {
             productData.setName(
-                    productDto.getName());
+                    productRequestDto.getName());
         }
 
         if (Objects.nonNull(
@@ -68,16 +66,15 @@ public class ProductServiceImpli implements ProductService {
                 && !"".equalsIgnoreCase(
                 productData.getDescription())) {
             productData.setDescription(
-                    productDto.getDescription());
+                    productRequestDto.getDescription());
         }
 
         if (Objects.nonNull(productData.getPrice())) {
             productData.setPrice(
-                    productDto.getPrice());
+                    productRequestDto.getPrice());
         }
 
         Product savedProduct = productRepository.save(productData);
-//        ProductDTO productDTO = modelMapper.map(savedProduct, ProductDTO.class);
 
         return productMapper.modelToDto(savedProduct);
     }
