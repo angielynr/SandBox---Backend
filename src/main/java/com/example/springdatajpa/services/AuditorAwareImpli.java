@@ -8,6 +8,6 @@ public class AuditorAwareImpli implements AuditorAware<String> {
 
     @Override
     public Optional<String> getCurrentAuditor(){
-        return Optional.of("Angielyn Rivera");
+        return Optional.of("Admin");
     }
 }
