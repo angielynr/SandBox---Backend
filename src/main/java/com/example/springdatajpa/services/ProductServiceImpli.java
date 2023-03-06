@@ -40,7 +40,7 @@ public class ProductServiceImpli implements ProductService {
 
     @Override
     public ProductResponseDTO addProduct(ProductRequestDTO productRequestDto) {
-        Product product = modelMapper.map(productRequestDto, Product.class);
+        Product product = productMapper.dtoToModel(productRequestDto);
         Product savedProduct = productRepository.save(product);
         return productMapper.modelToDto(savedProduct);
     }
