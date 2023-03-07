@@ -36,7 +36,7 @@ public class ProductController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<ProductResponseDTO> updateProduct(@PathVariable("id") Long id, @RequestBody ProductRequestDTO productRequestDTO) throws RecordNotFoundException {
+    public ResponseEntity<ProductResponseDTO> updateProduct(@PathVariable("id") Long id, @RequestBody @Valid ProductRequestDTO productRequestDTO) throws RecordNotFoundException {
         return new ResponseEntity<>(productService.updateProduct(id, productRequestDTO), HttpStatus.OK);
     }
 
