@@ -1,4 +1,4 @@
-package com.example.springdatajpa.dto;
+package com.example.springdatajpa.dto.responseDto;
 
 import lombok.Data;
 
@@ -9,5 +9,4 @@ public class ProductResponseDTO {
     private String name;
     private String description;
     private Double price;
-
 }
