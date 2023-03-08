@@ -1,7 +1,7 @@
 package com.example.springdatajpa.services;
 
-import com.example.springdatajpa.dto.ProductRequestDTO;
-import com.example.springdatajpa.dto.ProductResponseDTO;
+import com.example.springdatajpa.dto.requestDto.ProductRequestDTO;
+import com.example.springdatajpa.dto.responseDto.AllProductResponseDTO;
 import com.example.springdatajpa.exceptions.RecordNotFoundException;
 import com.example.springdatajpa.mapper.ProductMapper;
 import com.example.springdatajpa.models.Product;
@@ -27,26 +27,27 @@ public class ProductServiceImpli implements ProductService {
     ModelMapper modelMapper;
 
     @Override
-    public List<ProductResponseDTO> getProducts() {
+    public List<AllProductResponseDTO> getProducts() {
         List<Product> products = productRepository.findAll();
+
     return products.stream().map(product -> productMapper.modelToDto(product)).toList();
     }
 
     @Override
-    public ProductResponseDTO getProductById(Long id) {
+    public AllProductResponseDTO getProductById(Long id) {
         Product product = productRepository.findById(id).get();
         return productMapper.modelToDto(product);
     }
 
     @Override
-    public ProductResponseDTO addProduct(ProductRequestDTO productRequestDto) {
+    public AllProductResponseDTO addProduct(ProductRequestDTO productRequestDto) {
         Product product = productMapper.dtoToModel(productRequestDto);
         Product savedProduct = productRepository.save(product);
         return productMapper.modelToDto(savedProduct);
     }
 
     @Override
-    public ProductResponseDTO updateProduct(Long id , ProductRequestDTO productRequestDto) throws RecordNotFoundException {
+    public AllProductResponseDTO updateProduct(Long id , ProductRequestDTO productRequestDto) throws RecordNotFoundException {
 
         Optional<Product> productId= productRepository.findById(id);
         if(productId.isEmpty()){
