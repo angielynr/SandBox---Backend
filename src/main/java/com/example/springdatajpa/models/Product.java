@@ -22,4 +22,8 @@ public class Product {
 
     private Double price;
 
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "fk_category_id")
+    private ProductCategory productCategory;
+
 }
