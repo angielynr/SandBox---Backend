@@ -1,4 +1,4 @@
-package com.example.springdatajpa.dto;
+package com.example.springdatajpa.dto.responseDto;
 
 import lombok.Data;
 

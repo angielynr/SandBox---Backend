@@ -1,7 +1,7 @@
 package com.example.springdatajpa.services;
 
-import com.example.springdatajpa.dto.UserRequestDTO;
-import com.example.springdatajpa.dto.UserResponseDTO;
+import com.example.springdatajpa.dto.requestDto.UserRequestDTO;
+import com.example.springdatajpa.dto.responseDto.UserResponseDTO;
 import com.example.springdatajpa.exceptions.RecordNotFoundException;
 import com.example.springdatajpa.mapper.UserMapper;
 import com.example.springdatajpa.models.User;

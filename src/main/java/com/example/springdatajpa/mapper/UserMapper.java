@@ -1,7 +1,7 @@
 package com.example.springdatajpa.mapper;
 
-import com.example.springdatajpa.dto.UserRequestDTO;
-import com.example.springdatajpa.dto.UserResponseDTO;
+import com.example.springdatajpa.dto.requestDto.UserRequestDTO;
+import com.example.springdatajpa.dto.responseDto.UserResponseDTO;
 import com.example.springdatajpa.models.User;
 import org.mapstruct.Mapper;
 

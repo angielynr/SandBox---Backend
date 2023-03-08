@@ -1,5 +1,6 @@
-package com.example.springdatajpa.dto;
+package com.example.springdatajpa.dto.requestDto;
 
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 
@@ -12,6 +13,7 @@ public class UserRequestDTO {
     @NotBlank(message = "Last name is required.")
     private String lastName;
 
+    @Email
     @NotBlank(message = "Email is required.")
     private String email;
 }
